@@ -5,6 +5,9 @@
     Author: Alejandro Mujica
     alejandro.j.mujic4@gmail.com
 
+    Edit by: Kevin Márquez
+    marquezberrioskgmail.com
+
     This file contains the game settings that include dependencies, constants of values to set
     up the game, sounds, textures, frames, and fonts.
 ]]
@@ -49,8 +52,8 @@ require 'src/world/Room'
 VIRTUAL_WIDTH = 384
 VIRTUAL_HEIGHT = 216
 
-WINDOW_WIDTH = 1280
-WINDOW_HEIGHT = 720
+WINDOW_WIDTH = VIRTUAL_WIDTH * 2.25
+WINDOW_HEIGHT = VIRTUAL_HEIGHT * 2.25
 
 TILE_SIZE = 16
 
