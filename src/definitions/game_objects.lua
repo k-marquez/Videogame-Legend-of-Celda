@@ -27,6 +27,79 @@ GAME_OBJECT_DEFS = {
             }
         }
     },
+    ['chess'] = {
+        type = 'chess',
+        texture = 'chess',
+        frame = 1,
+        width = 32,
+        height = 32,
+        solid = true,
+        defaultState = 'closed',
+        states = {
+            ['closed'] = {
+                frame = 1
+            },
+            ['opened'] = {
+                frame = 2
+            }
+        }
+    },
+    ['bow'] = {
+        type = 'bow',
+        texture = 'bow',
+        frame = 1,
+        width = 20,
+        height = 20,
+        solid = true,
+        consumable = false,
+        defaultState = 'default',
+        takeable = true,
+        states = {
+            ['default'] = {
+                frame = 4
+            },
+            ['up'] = {
+                frame = 7
+            },
+            ['bottom'] = {
+                frame = 15
+            },
+            ['left'] = {
+                frame = 11
+            },
+            ['right'] = {
+                frame = 3
+            }
+        }
+    },
+    ['arrow'] = {
+        type = 'arrow',
+        texture = 'arrow',
+        frame = 1,
+        width = 20,
+        height = 20,
+        solid = true,
+        consumable = false,
+        defaultState = 'default',
+        takeable = false,
+        states = {
+            ['default'] = {
+                frame = 1
+            },
+            ['up'] = {
+                frame = 11
+            },
+            ['bottom'] = {
+                frame = 11
+            },
+            ['left'] = {
+                frame = 15
+            },
+            ['right'] = {
+                frame = 15
+            }
+        }
+    },
     ['pot'] = {
         type = 'pot',
         texture = 'tiles',

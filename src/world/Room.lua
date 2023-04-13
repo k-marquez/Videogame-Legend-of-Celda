@@ -181,6 +181,7 @@ end
 ]]
 function Room:generateEntities()
     local types = {'skeleton', 'slime', 'bat', 'ghost', 'spider'}
+    self.spwan_chess = false
 
     for i = 1, 10 do
         local type = types[math.random(#types)]
@@ -221,6 +222,29 @@ function Room:generateObjects()
         math.random(MAP_RENDER_OFFSET_Y + TILE_SIZE,
                     VIRTUAL_HEIGHT - (VIRTUAL_HEIGHT - MAP_HEIGHT * TILE_SIZE) + MAP_RENDER_OFFSET_Y - TILE_SIZE - 16)
     ))
+
+    if math.random() > 0.001 and not self.spwan_chess then
+        self.spwan_chess = true
+        table.insert(self.objects, GameObject(
+            GAME_OBJECT_DEFS['chess'],
+            math.random(MAP_RENDER_OFFSET_X + TILE_SIZE,
+                        VIRTUAL_WIDTH - TILE_SIZE * 2 - 16),
+            math.random(MAP_RENDER_OFFSET_Y + TILE_SIZE,
+                        VIRTUAL_HEIGHT - (VIRTUAL_HEIGHT - MAP_HEIGHT * TILE_SIZE) + MAP_RENDER_OFFSET_Y - TILE_SIZE - 16)
+        ))
+    
+        -- get a reference to the switch
+        local chess = self.objects[1]
+
+        -- define a function for the switch that will open all doors in the room
+        chess.onCollide = function()
+            if chess.state == 'closed' then
+                chess.state = 'opened'
+
+                SOUNDS['door']:play()
+            end
+        end
+    end
 
     -- get a reference to the switch
     local switch = self.objects[1]
