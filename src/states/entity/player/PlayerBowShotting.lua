@@ -49,5 +49,5 @@ function PlayerBowShotting:render()
     love.graphics.draw(TEXTURES[anim.texture], FRAMES[anim.texture][anim:getCurrentFrame()],
         math.floor(self.player.x - self.player.offsetX), math.floor(self.player.y - self.player.offsetY))
 
-    self.player.bow.render(self.player.offsetX, self.player.offsetY)
+    self.player.bow:render(self.player.offsetX, self.player.offsetY)
 end
