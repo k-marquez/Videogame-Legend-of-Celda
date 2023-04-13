@@ -29,6 +29,10 @@ function Room:init(player)
     self.objects = {}
     self:generateObjects()
 
+    -- object flags
+    self.spwan_chess = false
+    self.spwan_bow = true
+
     -- doorways that lead to other dungeon rooms
     self.doorways = {}
     table.insert(self.doorways, Doorway('top', false, self))
@@ -181,7 +185,6 @@ end
 ]]
 function Room:generateEntities()
     local types = {'skeleton', 'slime', 'bat', 'ghost', 'spider'}
-    self.spwan_chess = false
 
     for i = 1, 10 do
         local type = types[math.random(#types)]
@@ -234,12 +237,21 @@ function Room:generateObjects()
         ))
     
         -- get a reference to the switch
-        local chess = self.objects[1]
+        local chess = self.objects[2]
 
         -- define a function for the switch that will open all doors in the room
         chess.onCollide = function()
             if chess.state == 'closed' then
                 chess.state = 'opened'
+                
+                if self.spwan_bow then
+                    self.spwan_bow = false
+                    table.insert(self.objects, GameObject(
+                        GAME_OBJECT_DEFS['bow'],
+                        chess.x + 5,
+                        chess.y
+                    ))
+                end
 
                 SOUNDS['door']:play()
             end

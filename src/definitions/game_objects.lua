@@ -72,6 +72,22 @@ GAME_OBJECT_DEFS = {
             }
         }
     },
+    ['bow-takeable'] = {
+        type = 'bow',
+        texture = 'bow',
+        frame = 1,
+        width = 20,
+        height = 20,
+        solid = true,
+        consumable = false,
+        defaultState = 'default',
+        takeable = true,
+        states = {
+            ['default'] = {
+                frame = 4
+            }
+        }
+    },
     ['arrow'] = {
         type = 'arrow',
         texture = 'arrow',
