@@ -21,7 +21,7 @@ function Player:take_bow()
     if not self.has_bow then
         print("Tomé el arco")
         self.has_bow = true
-        self.bow = Bow (GAME_OBJECT_DEFS['bow'],self)
+        self.bow = Bow{definition_obj = GAME_OBJECT_DEFS['bow'], player = self}
     end
 end
 

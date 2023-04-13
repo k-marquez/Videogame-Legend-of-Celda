@@ -37,10 +37,10 @@ function PlayerWalkState:update(dt)
         self.entity:changeState('idle')
     end
         
-    if love.keyboard.wasPressed('space') and not love.keyboard.wasPressed('d') then
+    if love.keyboard.wasPressed('space') then
         self.entity:changeState('swing-sword')
-    elseif love.keyboard.wasPressed('d') and self.player.has_bow and not love.keyboard.wasPressed('space') then
-        self.player:changeState('shot-bow')
+    elseif love.keyboard.wasPressed('d') and self.entity.bow ~= nil then
+        self.entity:changeState('shot-bow')
     elseif love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
         local room = self.dungeon.currentRoom
         

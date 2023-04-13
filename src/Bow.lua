@@ -9,43 +9,33 @@
 
     This file contains the class Bow.
 ]]
-Bow = Class{}
+Bow = Class{__includes = GameObject}
 
-function Bow:init(def, player)
-    -- string identifying this object type
-    self.type = def.type
-
-    self.texture = def.texture
-    self.frame = def.frame or 1
-
-    -- whether it acts as an obstacle or not
-    self.solid = def.solid
-
-    self.defaultState = def.defaultState
-    self.state = self.defaultState
-    self.states = def.states
-
-    -- dimensions
-    self.x = player.x
-    self.y = player.y
-    self.width = def.width
-    self.height = def.height
-
-    -- default empty collision callback
-    self.onCollide = function() end
-
-    -- variable for consumable objects
-    self.consumable = def.consumable
-
-    -- onConsume function an empty function if it is not specified
-    self.onConsume = def.onConsume or function() end
-
-    -- an object could be taken or not
-    self.takeable = def.takeable
-    self.taken = false
-
-    self.player = player
+function Bow:init(def)
+    GameObject.init(self, def.definition_obj, def.player.x, def.player.y)
+    self.player = def.player
+    self.state = self.player.direction
+    self.frame = self.states[self.state].frame
     print("Creando arco")
+    print(self.texture)
+    print(self.type)
+    print(self.solid)
+
+    print(self.defaultState)
+    print(self.state)
+    print(self.states)
+
+    print(self.width)
+    print(self.height)
+
+    print(self.onCollide)
+
+    print(self.consumable)
+
+    print(self.onConsume)
+
+    print(self.takeable)
+    print(self.taken)
     print(TEXTURES[self.texture])
     print(FRAMES[self.texture][self.states[self.state].frame])
     print(self.frame)
@@ -59,10 +49,13 @@ end
 
 function Bow:update(dt)
     -- update state of bow based on where the player is and facing
+    print("Update frame and state of bow")
     self.state = self.player.direction
+    self.frame = self.states[self.state].frame
 end
 
 function Bow:render(adjacentOffsetX, adjacentOffsetY)
+    self.player.bow:shot()
     --print(TEXTURES[self.texture])
     --print(FRAMES[self.texture][self.states[self.state].frame])
     --print(self.frame)

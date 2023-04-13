@@ -13,10 +13,9 @@ PlayerBowShotting = Class{__includes = BaseState}
 
 function PlayerBowShotting:init(player, dungeon)
     self.player = player
-    self.dungeon = dungeon
 
     -- render offset for spaced character sprite
-    self.player.offsetY = 8
+    self.player.offsetY = 5
     self.player.offsetX = 8
 
     self.player:changeAnimation('bow-' .. self.player.direction)
@@ -26,11 +25,13 @@ function PlayerBowShotting:enter(params)
     SOUNDS['sword']:stop()
     SOUNDS['sword']:play()
 
-    -- restart sword swing animation
+    -- restart bow swing animation
     self.player.currentAnimation:refresh()
 end
 
 function PlayerBowShotting:update(dt)
+    self.player.bow:update(dt)
+    
     if self.player.currentAnimation.timesPlayed > 0 then
         self.player.currentAnimation.timesPlayed = 0
         self.player:changeState('idle')
@@ -48,5 +49,5 @@ function PlayerBowShotting:render()
     love.graphics.draw(TEXTURES[anim.texture], FRAMES[anim.texture][anim:getCurrentFrame()],
         math.floor(self.player.x - self.player.offsetX), math.floor(self.player.y - self.player.offsetY))
 
-    self.player.bow.render()
+    self.player.bow.render(self.player.offsetX, self.player.offsetY)
 end
