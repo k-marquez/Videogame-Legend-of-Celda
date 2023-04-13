@@ -72,22 +72,6 @@ GAME_OBJECT_DEFS = {
             }
         }
     },
-    ['bow-takeable'] = {
-        type = 'bow',
-        texture = 'bow',
-        frame = 1,
-        width = 20,
-        height = 20,
-        solid = true,
-        consumable = false,
-        defaultState = 'default',
-        takeable = true,
-        states = {
-            ['default'] = {
-                frame = 4
-            }
-        }
-    },
     ['arrow'] = {
         type = 'arrow',
         texture = 'arrow',
@@ -151,5 +135,25 @@ GAME_OBJECT_DEFS = {
             player:heal(2)
             SOUNDS['heart-taken']:play()
         end
-    }
+    },
+    ['bow-takeable'] = {
+        type = 'bow-takeable',
+        texture = 'bow',
+        frame = 1,
+        width = 20,
+        height = 20,
+        solid = false,
+        consumable = true,
+        defaultState = 'default',
+        takeable = false,
+        states = {
+            ['default'] = {
+                frame = 4
+            }
+        },
+        onConsume = function(player)
+            player:take_bow()
+            SOUNDS['heart-taken']:play()
+        end
+    },
 }

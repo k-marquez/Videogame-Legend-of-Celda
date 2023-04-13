@@ -30,7 +30,6 @@ function Room:init(player)
     self:generateObjects()
 
     -- object flags
-    self.spwan_chess = false
     self.spwan_bow = true
 
     -- doorways that lead to other dungeon rooms
@@ -226,14 +225,13 @@ function Room:generateObjects()
                     VIRTUAL_HEIGHT - (VIRTUAL_HEIGHT - MAP_HEIGHT * TILE_SIZE) + MAP_RENDER_OFFSET_Y - TILE_SIZE - 16)
     ))
 
-    if math.random() > 0.001 and not self.spwan_chess then
-        self.spwan_chess = true
+    if math.random() > 0.001 and not self.player.bow then
         table.insert(self.objects, GameObject(
             GAME_OBJECT_DEFS['chess'],
             math.random(MAP_RENDER_OFFSET_X + TILE_SIZE,
                         VIRTUAL_WIDTH - TILE_SIZE * 2 - 16),
             math.random(MAP_RENDER_OFFSET_Y + TILE_SIZE,
-                        VIRTUAL_HEIGHT - (VIRTUAL_HEIGHT - MAP_HEIGHT * TILE_SIZE) + MAP_RENDER_OFFSET_Y - TILE_SIZE - 16)
+                        VIRTUAL_HEIGHT - (VIRTUAL_HEIGHT - MAP_HEIGHT * TILE_SIZE) + MAP_RENDER_OFFSET_Y - TILE_SIZE - 60)
         ))
     
         -- get a reference to the switch
@@ -247,10 +245,27 @@ function Room:generateObjects()
                 if self.spwan_bow then
                     self.spwan_bow = false
                     table.insert(self.objects, GameObject(
-                        GAME_OBJECT_DEFS['bow'],
+                        GAME_OBJECT_DEFS['bow-takeable'],
                         chess.x + 5,
                         chess.y
                     ))
+
+                    local bow = nil
+
+                    for i = 1, #self.objects do
+                        if self.objects[i].type == 'bow-takeable' then
+                            bow = self.objects[i]
+                        end
+                    end
+
+                    local toTween = {
+                        [bow] = {y = bow.y + 16}
+                    }
+
+                    Timer.tween(1, toTween):finish(function()
+                        print("Haciendo consumible el arco")
+                        bow.consumable = true
+                    end)
                 end
 
                 SOUNDS['door']:play()
