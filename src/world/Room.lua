@@ -225,7 +225,7 @@ function Room:generateObjects()
                     VIRTUAL_HEIGHT - (VIRTUAL_HEIGHT - MAP_HEIGHT * TILE_SIZE) + MAP_RENDER_OFFSET_Y - TILE_SIZE - 16)
     ))
 
-    if math.random() > 0.001 and not self.player.bow then
+    if math.random() < PROBABILITY_SPAWN_CHESS and self.player.bow == nil then
         table.insert(self.objects, GameObject(
             GAME_OBJECT_DEFS['chess'],
             math.random(MAP_RENDER_OFFSET_X + TILE_SIZE,

@@ -74,6 +74,8 @@ function PlayerSwingSwordState:update(dt)
 
     if love.keyboard.wasPressed('space') then
         self.player:changeState('swing-sword')
+    elseif love.keyboard.wasPressed('d') and self.player.bow ~= nil then
+        self.player:changeState('shot-bow')
     end
 end
 

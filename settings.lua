@@ -33,6 +33,7 @@ require 'src/states/entity/EntityIdleState'
 require 'src/states/entity/EntityWalkState'
 
 require 'src/states/entity/player/PlayerIdleState'
+require 'src/states/entity/player/PlayerBowShotting'
 require 'src/states/entity/player/PlayerSwingSwordState'
 require 'src/states/entity/player/PlayerWalkState'
 require 'src/states/entity/player/PlayerPotLiftState'
@@ -48,6 +49,7 @@ require 'src/utilities/quads'
 require 'src/world/Doorway'
 require 'src/world/Dungeon'
 require 'src/world/Room'
+require 'src/Bow'
 
 VIRTUAL_WIDTH = 384
 VIRTUAL_HEIGHT = 216
@@ -56,6 +58,8 @@ WINDOW_WIDTH = VIRTUAL_WIDTH * 2.25
 WINDOW_HEIGHT = VIRTUAL_HEIGHT * 2.25
 
 TILE_SIZE = 16
+
+PROBABILITY_SPAWN_CHESS = 1
 
 --
 -- map constants

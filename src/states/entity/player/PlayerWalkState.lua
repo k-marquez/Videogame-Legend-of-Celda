@@ -36,9 +36,11 @@ function PlayerWalkState:update(dt)
     else
         self.entity:changeState('idle')
     end
-
-    if love.keyboard.wasPressed('space') then
+        
+    if love.keyboard.wasPressed('space') and not love.keyboard.wasPressed('d') then
         self.entity:changeState('swing-sword')
+    elseif love.keyboard.wasPressed('d') and self.player.has_bow and not love.keyboard.wasPressed('space') then
+        self.player:changeState('shot-bow')
     elseif love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
         local room = self.dungeon.currentRoom
         
@@ -63,33 +65,32 @@ function PlayerWalkState:update(dt)
                     potIdx = k
                     break
                 end
-
+                
                 if (self.entity.direction == 'left') and (objRow == playerRow) and (objCol == (playerCol - 1)) then
                     takenPot = obj
                     potIdx = k
                     break
                 end
-
+                
                 if (self.entity.direction == 'up') and (objCol == playerCol) and (objRow == (playerRow - 1)) then
                     takenPot = obj
                     potIdx = k
                     break
                 end
-
+                
                 if (self.entity.direction == 'down') and (objCol == playerCol) and (objRow == (playerRow + 1)) then
                     takenPot = obj
                     potIdx = k
                     break
                 end
             end
-
-        end
-
-        if takenPot ~= nil  then
-            table.remove(room.objects, potIdx)
-            self.entity:changeState('pot-lift', {
-                pot = takenPot
-            })
+            
+            if takenPot ~= nil  then
+                table.remove(room.objects, potIdx)
+                self.entity:changeState('pot-lift', {
+                    pot = takenPot
+                })
+            end
         end
     end
 

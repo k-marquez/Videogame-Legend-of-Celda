@@ -52,16 +52,13 @@ GAME_OBJECT_DEFS = {
         height = 20,
         solid = true,
         consumable = false,
-        defaultState = 'default',
+        defaultState = 'down',
         takeable = true,
         states = {
-            ['default'] = {
-                frame = 4
-            },
             ['up'] = {
                 frame = 7
             },
-            ['bottom'] = {
+            ['down'] = {
                 frame = 15
             },
             ['left'] = {

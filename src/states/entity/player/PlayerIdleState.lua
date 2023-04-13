@@ -26,6 +26,8 @@ function PlayerIdleState:update(dt)
 
     if love.keyboard.wasPressed('space') then
         self.entity:changeState('swing-sword')
+    elseif love.keyboard.wasPressed('d') and self.entity.bow ~= nil then
+        self.entity:changeState('shot-bow')
     elseif love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
         -- look for the pot
         local room = self.dungeon.currentRoom
