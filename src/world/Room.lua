@@ -54,6 +54,16 @@ function Room:init(player, create_boss_room)
         table.insert(self.doorways, Doorway('bottom', false, self))
         table.insert(self.doorways, Doorway('left', false, self))
         table.insert(self.doorways, Doorway('right', false, self))
+    else
+        if self.player.direction == 'left' then
+            table.insert(self.doorways, Doorway('right', false, self))
+        elseif self.player.direction == 'right' then
+            table.insert(self.doorways, Doorway('left', false, self))
+        elseif self.player.direction == 'up' then
+            table.insert(self.doorways, Doorway('bottom', false, self))
+        else
+            table.insert(self.doorways, Doorway('top', false, self))
+        end
     end
 end
 

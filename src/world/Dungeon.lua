@@ -52,7 +52,7 @@ end
 function Dungeon:beginShifting(shiftX, shiftY)
     self.shifting = true
     local r = math.random(10)
-    if self.player.has_bow and 5 < r and r < 7 then
+    if self.player.has_bow and 5 <= r and r <= 7 then
         self.create_boss_room = true
     end
 
