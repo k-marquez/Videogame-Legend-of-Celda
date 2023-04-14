@@ -51,7 +51,7 @@ end
 
 function Bow:render()
     local anim = self.player.currentAnimation
-    
+
     if self.state == 'up' then
         -- rendering bow
         love.graphics.draw(TEXTURES[self.texture], FRAMES[self.texture][self.states[self.state].frame or self.frame],

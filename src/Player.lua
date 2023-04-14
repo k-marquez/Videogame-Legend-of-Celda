@@ -7,6 +7,8 @@
 
     Modified by Alejandro Mujica (alejandro.j.mujic4@gmail.com) for teaching purpose.
 
+    Modified by Kevin Márquez (marquezberriosk@gmail.com) for academic purpose.
+
     This file contains the class Player.
 ]]
 Player = Class{__includes = Entity}
@@ -19,7 +21,6 @@ end
 
 function Player:take_bow()
     if not self.has_bow then
-        print("Tomé el arco")
         self.has_bow = true
         self.bow = Bow{definition_obj = GAME_OBJECT_DEFS['bow'], player = self}
     end

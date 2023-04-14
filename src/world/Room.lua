@@ -7,11 +7,13 @@
 
     Modified by Alejandro Mujica (alejandro.j.mujic4@gmail.com) for teaching purpose.
 
+    Modified by Kevin Márquez (marquezberriosk@gmail.com) for academic purpose.
+
     This file contains the class Room.
 ]]
 Room = Class{}
 
-function Room:init(player)
+function Room:init(player, create_boss_room)
     -- reference to player for collisions, etc.
     self.player = player
 
@@ -23,22 +25,16 @@ function Room:init(player)
 
     -- entities in the room
     self.entities = {}
-    self:generateEntities()
-
+    
     -- game objects in the room
     self.objects = {}
-    self:generateObjects()
 
-    -- object flags
+    -- bow flag
     self.spwan_bow = true
 
     -- doorways that lead to other dungeon rooms
     self.doorways = {}
-    table.insert(self.doorways, Doorway('top', false, self))
-    table.insert(self.doorways, Doorway('bottom', false, self))
-    table.insert(self.doorways, Doorway('left', false, self))
-    table.insert(self.doorways, Doorway('right', false, self))
-
+    
     -- used for centering the dungeon rendering
     self.renderOffsetX = MAP_RENDER_OFFSET_X
     self.renderOffsetY = MAP_RENDER_OFFSET_Y
@@ -49,6 +45,16 @@ function Room:init(player)
 
     -- projectiles
     self.projectiles = {}
+
+    -- If new room isn't a boss room, create entities and objects
+    if not create_boss_room then
+        self:generateEntities()
+        self:generateObjects()
+        table.insert(self.doorways, Doorway('top', false, self))
+        table.insert(self.doorways, Doorway('bottom', false, self))
+        table.insert(self.doorways, Doorway('left', false, self))
+        table.insert(self.doorways, Doorway('right', false, self))
+    end
 end
 
 function Room:update(dt)
@@ -263,7 +269,6 @@ function Room:generateObjects()
                     }
 
                     Timer.tween(1, toTween):finish(function()
-                        print("Haciendo consumible el arco")
                         bow.consumable = true
                     end)
                 end

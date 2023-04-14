@@ -24,6 +24,9 @@ function Dungeon:init(player)
     self.cameraY = 0
     self.shifting = false
 
+    -- flag to create a boss room
+    self.create_boss_room = false  
+
     -- trigger camera translation and adjustment of rooms whenever the player triggers a shift
     -- via a doorway collision, triggered in PlayerWalkState
     Event.on('shift-left', function()
@@ -48,7 +51,12 @@ end
 ]]
 function Dungeon:beginShifting(shiftX, shiftY)
     self.shifting = true
-    self.nextRoom = Room(self.player)
+    local r = math.random(10)
+    if self.player.has_bow and 5 < r and r < 7 then
+        self.create_boss_room = true
+    end
+
+    self.nextRoom = Room(self.player, self.create_boss_room)
 
     -- start all doors in next room as open until we get in
     for k, doorway in pairs(self.nextRoom.doorways) do

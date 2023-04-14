@@ -7,6 +7,8 @@
 
     Modified by Alejandro Mujica (alejandro.j.mujic4@gmail.com) for teaching purpose.
 
+    Modified by Kevin Márquez (marquezberriosk@gmail.com) for academic purpose.
+
     This file contains the class PlayerIdleState.
 ]]
 PlayerIdleState = Class{__includes = EntityIdleState}
