@@ -268,7 +268,7 @@ function Room:generateObjects()
                     end)
                 end
 
-                SOUNDS['door']:play()
+                SOUNDS['trunk']:play()
             end
         end
     end

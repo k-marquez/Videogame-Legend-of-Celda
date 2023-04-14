@@ -150,7 +150,7 @@ GAME_OBJECT_DEFS = {
         },
         onConsume = function(player)
             player:take_bow()
-            SOUNDS['heart-taken']:play()
+            SOUNDS['take']:play()
         end
     },
 }

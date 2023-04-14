@@ -23,8 +23,10 @@ function PlayerBowShotting:init(player, dungeon)
 end
 
 function PlayerBowShotting:enter(params)
-    SOUNDS['sword']:stop()
-    SOUNDS['sword']:play()
+    SOUNDS['flying-arrow']:stop()
+    SOUNDS['flying-arrow']:play()
+    SOUNDS['shoot-arrow']:stop()
+    SOUNDS['shoot-arrow']:play()
 
     -- restart bow swing animation
     self.player.currentAnimation:refresh()

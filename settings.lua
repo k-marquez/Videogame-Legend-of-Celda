@@ -140,5 +140,9 @@ SOUNDS = {
     ['hit-player'] = love.audio.newSource('sounds/hit_player.wav', 'static'),
     ['door'] = love.audio.newSource('sounds/door.wav', 'static'),
     ['heart-taken'] = love.audio.newSource('sounds/heart_taken.wav', 'static'),
-    ['pot-wall'] = love.audio.newSource('sounds/pot_wall.wav', 'static')
+    ['shoot-arrow'] = love.audio.newSource('sounds/shoot_arrow.mp3', 'static'),
+    ['take'] = love.audio.newSource('sounds/take.mp3', 'static'),
+    ['trunk'] = love.audio.newSource('sounds/trunk.mp3', 'static'),
+    ['flying-arrow'] = love.audio.newSource('sounds/flying_arrow.mp3', 'static')
+
 }
