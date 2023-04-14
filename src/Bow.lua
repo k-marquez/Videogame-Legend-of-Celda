@@ -16,11 +16,16 @@ function Bow:init(def)
     self.player = def.player
     self.state = self.player.direction
     self.frame = self.states[self.state].frame
-    print("Creando arco")
+    self.offsetBowY = 0
+    self.offsetBowX = 0
 end
 
 function Bow:shot()
-    print("Disparé")
+    local x = self.x + self.offsetBowX
+    local y = self.y + self.offsetBowY
+    local arrow = GameObject(GAME_OBJECT_DEFS['arrow'], x, y)
+    arrow.state = self.state
+    table.insert(self.dungeon.currentRoom.projectiles, Projectile(arrow, self.player.direction))
 end
 
 function Bow:update(dt)
@@ -29,37 +34,37 @@ function Bow:update(dt)
     self.x = self.player.x
     self.y = self.player.y
     self.frame = self.states[self.state].frame
+    if self.state == 'up' then
+        self.offsetBowY = 5
+        self.offsetBowX = 3
+    elseif self.state == 'left' then
+        self.offsetBowX = - 7
+        self.offsetBowY = 1
+    elseif self.state == 'right' then
+        self.offsetBowX = 2
+        self.offsetBowY = 1
+    else
+        self.offsetBowX = -2
+        self.offsetBowY = 7
+    end
 end
 
 function Bow:render()
     local anim = self.player.currentAnimation
-    local offsetBowY = nil
-    local offsetBowX = nil
+    
     if self.state == 'up' then
-        offsetBowY = 5
-        offsetBowX = 3
         -- rendering bow
         love.graphics.draw(TEXTURES[self.texture], FRAMES[self.texture][self.states[self.state].frame or self.frame],
-            self.x - offsetBowX, self.y - offsetBowY)
+            self.x - self.offsetBowX, self.y - self.offsetBowY)
         -- rendering player
         love.graphics.draw(TEXTURES[anim.texture], FRAMES[anim.texture][anim:getCurrentFrame()],
             math.floor(self.player.x), math.floor(self.player.y - self.player.offsetY))
     else
-        if self.state == 'left' then
-            offsetBowX = - 7
-            offsetBowY = 1
-        elseif self.state == 'right' then
-            offsetBowX = 2
-            offsetBowY = 1
-        else
-            offsetBowX = -2
-            offsetBowY = 7
-        end
         -- rendering player
         love.graphics.draw(TEXTURES[anim.texture], FRAMES[anim.texture][anim:getCurrentFrame()],
             math.floor(self.player.x), math.floor(self.player.y - self.player.offsetY))
         -- rendering bow
         love.graphics.draw(TEXTURES[self.texture], FRAMES[self.texture][self.states[self.state].frame or self.frame],
-            self.x + offsetBowX, self.y + offsetBowY)
+            self.x + self.offsetBowX, self.y + self.offsetBowY)
     end
 end

@@ -13,6 +13,7 @@ PlayerBowShotting = Class{__includes = BaseState}
 
 function PlayerBowShotting:init(player, dungeon)
     self.player = player
+    self.player.bow['dungeon'] = dungeon
 
     -- render offset for spaced character sprite
     self.player.offsetY = 5
@@ -34,6 +35,7 @@ function PlayerBowShotting:update(dt)
     
     if self.player.currentAnimation.timesPlayed > 0 then
         self.player.currentAnimation.timesPlayed = 0
+        self.player.bow:shot()
         self.player:changeState('idle')
     end
 

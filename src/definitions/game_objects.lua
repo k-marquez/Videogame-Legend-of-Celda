@@ -86,7 +86,7 @@ GAME_OBJECT_DEFS = {
             ['up'] = {
                 frame = 11
             },
-            ['bottom'] = {
+            ['down'] = {
                 frame = 11
             },
             ['left'] = {
