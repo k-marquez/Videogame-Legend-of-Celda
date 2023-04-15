@@ -121,9 +121,11 @@ function Dungeon:beginShifting(shiftX, shiftY)
         self.player:goInvulnerable(1)
 
         SOUNDS['door']:play()
-        SOUNDS['dungeon-music']:stop()
-        SOUNDS['boss-room-music']:setLooping(true)
-        SOUNDS['boss-room-music']:play()
+        if self.create_boss_room then
+            SOUNDS['dungeon-music']:stop()
+            SOUNDS['boss-room-music']:setLooping(true)
+            SOUNDS['boss-room-music']:play()
+        end
     end)
 end
 
