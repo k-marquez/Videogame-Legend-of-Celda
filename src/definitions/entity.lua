@@ -15,6 +15,7 @@
 ]]
 ENTITY_DEFS = {
     ['player'] = {
+        type = 'player',
         walkSpeed = 60,
         animations = {
             ['walk-left'] = {
@@ -164,7 +165,8 @@ ENTITY_DEFS = {
         }
     },
     ['boss'] = {
-        walkSpeed = 50,
+        type = 'boss',
+        walkSpeed = 30,
         animations = {
             ['walk-left'] = {
                 frames = {5, 6, 7, 8},
@@ -205,6 +207,7 @@ ENTITY_DEFS = {
         }
     },
     ['skeleton'] = {
+        type = 'skeleton',
         texture = 'entities',
         animations = {
             ['walk-left'] = {
@@ -238,6 +241,7 @@ ENTITY_DEFS = {
         }
     },
     ['slime'] = {
+        type = 'slime',
         texture = 'entities',
         animations = {
             ['walk-left'] = {
@@ -271,6 +275,7 @@ ENTITY_DEFS = {
         }
     },
     ['bat'] = {
+        type = 'bat',
         texture = 'entities',
         animations = {
             ['walk-left'] = {
@@ -308,6 +313,7 @@ ENTITY_DEFS = {
         }
     },
     ['ghost'] = {
+        type = 'ghost',
         texture = 'entities',
         animations = {
             ['walk-left'] = {
@@ -341,6 +347,7 @@ ENTITY_DEFS = {
         }
     },
     ['spider'] = {
+        type = 'spider',
         texture = 'entities',
         animations = {
             ['walk-left'] = {

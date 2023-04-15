@@ -83,6 +83,8 @@ function Room:create_boss()
     table.insert(self.entities, Boss {
         animations = ENTITY_DEFS['boss'].animations,
         walkSpeed = ENTITY_DEFS['boss'].walkSpeed,
+        
+        type = 'boss',
 
         x = boss_x,
         y = boss_y,
@@ -185,9 +187,14 @@ function Room:update(dt)
             end
 
             if not entity.dead and projectile:collides(entity) then
-                entity:damage(1)
-                SOUNDS['hit-enemy']:play()
-                projectile.dead = true
+                if entity.type == 'boss' then
+                    entity:goInvulnerable(3)
+                    SOUNDS['hit-enemy']:play()
+                else
+                    entity:damage(1)
+                    SOUNDS['hit-enemy']:play()
+                    projectile.dead = true
+                end
             end
         end
 
@@ -260,18 +267,20 @@ function Room:generateEntities()
     local types = {'skeleton', 'slime', 'bat', 'ghost', 'spider'}
 
     for i = 1, 10 do
-        local type = types[math.random(#types)]
+        local type_off = types[math.random(#types)]
 
         table.insert(self.entities, Entity {
-            animations = ENTITY_DEFS[type].animations,
-            walkSpeed = ENTITY_DEFS[type].walkSpeed or 20,
+            animations = ENTITY_DEFS[type_off].animations,
+            walkSpeed = ENTITY_DEFS[type_off].walkSpeed or 20,
 
             -- ensure X and Y are within bounds of the map
             x = math.random(MAP_RENDER_OFFSET_X + TILE_SIZE,
                 VIRTUAL_WIDTH - TILE_SIZE * 2 - 16),
             y = math.random(MAP_RENDER_OFFSET_Y + TILE_SIZE,
                 VIRTUAL_HEIGHT - (VIRTUAL_HEIGHT - MAP_HEIGHT * TILE_SIZE) + MAP_RENDER_OFFSET_Y - TILE_SIZE - 16),
-            
+
+            type = type_off,
+
             width = 16,
             height = 16,
 

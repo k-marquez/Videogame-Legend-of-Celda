@@ -15,10 +15,12 @@ function PlayState:init()
     self.player = Player {
         animations = ENTITY_DEFS['player'].animations,
         walkSpeed = ENTITY_DEFS['player'].walkSpeed,
-        
+
+        type = 'player',
+
         x = VIRTUAL_WIDTH / 2 - 8,
         y = VIRTUAL_HEIGHT / 2 - 11,
-        
+
         width = 16,
         height = 22,
 

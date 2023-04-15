@@ -37,6 +37,13 @@ function Boss:attack()
     })
 end
 
+function Boss:damage(dmg)
+    if self.invulnerable then
+        Entity.damage(self, dmg)
+    end
+    print(self.health)
+end
+
 function Boss:update(dt)
     -- probabily of generate an attack
     if math.random() < 0.01 and not self.fire then
