@@ -18,6 +18,43 @@ function BossProjectile:init(def)
     self.index_anim = 1
     self.boss = def.boss
 
+    local dif_x = math.floor(self.obj.x - self.end_x)
+    local dif_y = math.floor(self.obj.y - self.end_y)
+    
+    if math.abs(dif_x) < self.boss.width + 5 then
+        if dif_y > 0 then
+            def.obj.state = 'up'
+            def.obj.frame = 17
+        else
+            def.obj.state = 'down'
+            def.obj.frame = 49
+        end
+    elseif math.abs(dif_y) < self.boss.height - 5  then
+        if dif_x > 0 then
+            def.obj.state = 'left'
+            def.obj.frame = 1
+        else
+            def.obj.state = 'right'
+            def.obj.frame = 33
+        end
+    elseif dif_x < 0 then
+        if dif_y < 0 then
+            def.obj.state = 'down-right'
+            def.obj.frame = 41
+        else
+            def.obj.state = 'up-right'
+            def.obj.frame = 25
+        end
+    else
+        if dif_y < 0 then
+            def.obj.state = 'down-left'
+            def.obj.frame = 57
+        else
+            def.obj.state = 'up-left'
+            def.obj.frame = 9
+        end
+    end
+
     local toTween = {
         [self.obj] = {x = self.end_x, y = self.end_y}
     }
