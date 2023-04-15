@@ -7,6 +7,8 @@
 
     Modified by Kevin Márquez (marquezberrioskgmail@gmail.com) for academic purpose.
 
+    Modified by Lewis Ochoa (lewis8a@gmail.com) for academic purpose.
+
     This file contains the class PlayerBowShotting.
 ]]
 PlayerBowShotting = Class{__includes = BaseState}

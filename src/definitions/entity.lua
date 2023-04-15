@@ -9,6 +9,8 @@
 
     Modified by Kevin Márquez (marquezberriosk@gmail.com) for academic purpose.
 
+    Modified by Lewis Ochoa (lewis8a@gmail.com) for academic purpose.
+
     This file contains the definition for entities.
 ]]
 ENTITY_DEFS = {
