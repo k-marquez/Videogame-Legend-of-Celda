@@ -129,7 +129,7 @@ FRAMES = {
     ['bow'] = generateQuads(TEXTURES['bow'], 20, 20),
     ['arrow'] = generateQuads(TEXTURES['arrow'], 20, 20),
     ['boss'] = generateQuads(TEXTURES['boss'], 16, 31),
-    ['fire-ball'] = generateQuads(TEXTURES['fire-ball'], 16, 16)
+    ['fire-ball'] = generateQuads(TEXTURES['fire-ball'], 28, 28)
 }
 
 FONTS = {

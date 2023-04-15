@@ -137,7 +137,11 @@ function Room:update(dt)
         -- collision between the player and entities in the room
         if not entity.dead and self.player:collides(entity) and not self.player.invulnerable then
             SOUNDS['hit-player']:play()
-            self.player:damage(1)
+            if entity.type == 'boss' then
+                self.player:damage(2)
+            else
+                self.player:damage(1)
+            end 
             self.player:goInvulnerable(1.5)
 
             if self.player.health == 0 then
