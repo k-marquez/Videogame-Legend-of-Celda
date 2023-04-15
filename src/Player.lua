@@ -45,3 +45,8 @@ function Player:render()
     -- love.graphics.rectangle('line', self.x, self.y, self.width, self.height)
     -- love.graphics.setColor(love.math.colorFromBytes(255, 255, 255, 255))
 end
+
+function Player:kill()
+    self.dead = true
+    
+end

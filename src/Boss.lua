@@ -14,68 +14,71 @@
     This file contains the class BossEnemy.
 ]]
 
-
 Boss = Class{__includes = Entity}
 
 function Boss:init(def)
     Entity.init(self, def)
-    --self.room = def.room
-    --self.player = def.player
+    self.room = def.room
+    self.player = def.player
     self.fire = false
 end
 
 function Boss:attack()
-    if math.random() < 1 then
-        self.fire = true
-        local x_end = self.player.x + self.player.width / 2
-        local y_end = self.player.y + self.player.height / 2
-        local fire_ball = GameObject(GAME_OBJECT_DEFS['fire-ball'], self.x, self.y)
-        local dif_x = math.floor(self.x - x_end)
-        local dif_y = math.floor(self.y - y_end)
-        if dif_x == 0 then
-            if dif_y > 0 then
-                fire_ball.state = 'up'
-                fire_ball.frame = 17
-            else
-                fire_ball.state = 'down'
-                fire_ball.frame = 49
-            end
-        elseif dif_y == 0 then
-            if dif_x > 0 then
-                fire_ball.state = 'left'
-                fire_ball.frame = 1
-            else
-                fire_ball.state = 'right'
-                fire_ball.frame = 33
-            end
-        elseif dif_x < 0 then
-            if dif_y < 0 then
-                fire_ball.state = 'down-right'
-                fire_ball.frame = 41
-            else
-                fire_ball.state = 'up-right'
-                fire_ball.frame = 25
-            end
+    self.fire = true
+    local x_end = self.player.x + self.player.width / 2
+    local y_end = self.player.y + self.player.height / 2
+    local fire_ball = GameObject(GAME_OBJECT_DEFS['fire-ball'], self.x, self.y)
+    local dif_x = math.floor(self.x - x_end)
+    local dif_y = math.floor(self.y - y_end)
+    if dif_x == 0 then
+        if dif_y > 0 then
+            fire_ball.state = 'up'
+            fire_ball.frame = 17
         else
-            if dif_y < 0 then
-                fire_ball.state = 'down-left'
-                fire_ball.frame = 57
-            else
-                fire_ball.state = 'up-left'
-                fire_ball.frame = 9
-            end
+            fire_ball.state = 'down'
+            fire_ball.frame = 49
         end
-
-        table.insert(self.room.projectiles, BossProjectile{
-            obj = GAME_OBJECT_DEFS['fire-ball'],
-            boss = self,
-            x = x_end,
-            y = y_end
-        })
+    elseif dif_y == 0 then
+        if dif_x > 0 then
+            fire_ball.state = 'left'
+            fire_ball.frame = 1
+        else
+            fire_ball.state = 'right'
+            fire_ball.frame = 33
+        end
+    elseif dif_x < 0 then
+        if dif_y < 0 then
+            fire_ball.state = 'down-right'
+            fire_ball.frame = 41
+        else
+            fire_ball.state = 'up-right'
+            fire_ball.frame = 25
+        end
+    else
+        if dif_y < 0 then
+            fire_ball.state = 'down-left'
+            fire_ball.frame = 57
+        else
+            fire_ball.state = 'up-left'
+            fire_ball.frame = 9
+        end
     end
+
+    table.insert(self.room.boss_projectiles, BossProjectile{
+        obj = fire_ball,
+        boss = self,
+        x = x_end,
+        y = y_end
+    })
 end
 
 function Boss:update(dt)
+    -- probabily of generate an attack
+    if math.random() < 0.5 and not self.fire then
+        print("Envié ataque")
+        self:attack()
+    end
+
     Entity.update(self, dt)
 end
 

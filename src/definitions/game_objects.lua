@@ -97,42 +97,42 @@ GAME_OBJECT_DEFS = {
             ['right'] = {
                 frame = 15
             }
-        },
-        ['fire-ball'] = {
-            type = 'fire-ball',
-            texture = 'fire-ball',
-            frame = 1,
-            width = 14,
-            height = 14,
-            solid = true,
-            consumable = false,
-            defaultState = 'left',
-            takeable = false,
-            states = {
-                ['up'] = {
-                    frame = {17,18,19,20,21,22,23,24}
-                },
-                ['down'] = {
-                    frame = {49,50,51,52,53,54,55,56}
-                },
-                ['left'] = {
-                    frame = {1,2,3,4,5,6,7,8}
-                },
-                ['right'] = {
-                    frame = {33,34,35,36,37,38,39,40}
-                },
-                ['up-lef'] = {
-                    frame = {9,10,11,12,13,14,15,16}
-                },
-                ['down-lef'] = {
-                    frame = {57,58,59,60,61,62,63,64}
-                },
-                ['up-right'] = {
-                    frame = {25,26,27,28,29,30,31,32}
-                },
-                ['down-right'] = {
-                    frame = {41,42,43,44,45,46,47,48}
-                }
+        }
+    },
+    ['fire-ball'] = {
+        type = 'fire-ball',
+        texture = 'fire-ball',
+        frame = 1,
+        width = 14,
+        height = 14,
+        solid = true,
+        consumable = false,
+        defaultState = 'left',
+        takeable = false,
+        states = {
+            ['up'] = {
+                frame = {17,18,19,20,21,22,23,24}
+            },
+            ['down'] = {
+                frame = {49,50,51,52,53,54,55,56}
+            },
+            ['left'] = {
+                frame = {1,2,3,4,5,6,7,8}
+            },
+            ['right'] = {
+                frame = {33,34,35,36,37,38,39,40}
+            },
+            ['up-lef'] = {
+                frame = {9,10,11,12,13,14,15,16}
+            },
+            ['down-lef'] = {
+                frame = {57,58,59,60,61,62,63,64}
+            },
+            ['up-right'] = {
+                frame = {25,26,27,28,29,30,31,32}
+            },
+            ['down-right'] = {
+                frame = {41,42,43,44,45,46,47,48}
             }
         }
     },

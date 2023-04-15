@@ -45,6 +45,7 @@ function Room:init(player, create_boss_room)
 
     -- projectiles
     self.projectiles = {}
+    self.boss_projectiles = {}
 
     self.boss_room = create_boss_room
 
@@ -93,7 +94,11 @@ function Room:create_boss()
         health = 15,
 
         -- rendering and collision offset for spaced sprites
-        offsetY = 5
+        offsetY = 5,
+
+        -- atributes necessary for functionality of boss
+        room = self,
+        player = self.player
     })
 
     self.entities[1].stateMachine = StateMachine {
@@ -188,6 +193,22 @@ function Room:update(dt)
 
         if projectile.dead then
             table.remove(self.projectiles, k)
+        end
+    end
+
+    for k, projectile in pairs(self.boss_projectiles) do
+        projectile:update(dt)
+
+        -- check collision with player
+        if not projectile.dead then
+            if not self.player.dead and projectile:collides(self.player) then
+                SOUNDS['hit-player']:play()
+                projectile.dead = true
+                self.player:kill()
+                stateMachine:change('game-over')
+            end
+        else
+            table.remove(self.boss_projectiles, k)
         end
     end
 end
@@ -404,6 +425,10 @@ function Room:render()
     end
 
     for k, projectile in pairs(self.projectiles) do
+        projectile:render()
+    end
+
+    for k, projectile in pairs(self.boss_projectiles) do
         projectile:render()
     end
 
