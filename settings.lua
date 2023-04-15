@@ -17,11 +17,14 @@ push = require 'lib/push'
 Timer = require 'lib/knife.timer'
 
 require 'src/Animation'
+require 'src/Boss'
+require 'src/Bow'
 require 'src/Entity'
 require 'src/GameObject'
 require 'src/Hitbox'
 require 'src/Player'
 require 'src/Projectile'
+require 'src/ProjectileBoss'
 require 'src/StateMachine'
 
 require 'src/definitions/entity'
@@ -49,7 +52,6 @@ require 'src/utilities/quads'
 require 'src/world/Doorway'
 require 'src/world/Dungeon'
 require 'src/world/Room'
-require 'src/Bow'
 
 VIRTUAL_WIDTH = 384
 VIRTUAL_HEIGHT = 216
@@ -148,5 +150,6 @@ SOUNDS = {
     ['trunk'] = love.audio.newSource('sounds/trunk.mp3', 'static'),
     ['flying-arrow'] = love.audio.newSource('sounds/flying_arrow.mp3', 'static'),
     ['fire-short'] = love.audio.newSource('sounds/fire_short.mp3', 'static'),
-    ['fire-long'] = love.audio.newSource('sounds/fire_long.mp3', 'static')
+    ['fire-long'] = love.audio.newSource('sounds/fire_long.mp3', 'static'),
+    ['boss-room-music'] = love.audio.newSource('sounds/boss_battle_music_zeldalike.mp3', 'static')
 }

@@ -52,7 +52,8 @@ end
 function Dungeon:beginShifting(shiftX, shiftY)
     self.shifting = true
     local r = math.random(10)
-    if self.player.has_bow and 5 <= r and r <= 7 then
+    --and 5 <= r and r <= 7
+    if self.player.has_bow then
         self.create_boss_room = true
     end
 
@@ -120,6 +121,9 @@ function Dungeon:beginShifting(shiftX, shiftY)
         self.player:goInvulnerable(1)
 
         SOUNDS['door']:play()
+        SOUNDS['dungeon-music']:stop()
+        SOUNDS['boss-room-music']:setLooping(true)
+        SOUNDS['boss-room-music']:play()
     end)
 end
 

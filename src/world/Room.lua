@@ -86,8 +86,8 @@ function Room:init(player, create_boss_room)
             x = boss_x,
             y = boss_y,
             
-            width = 16,
-            height = 31,
+            width = 14,
+            height = 25,
 
             health = 15
         })
