@@ -56,49 +56,52 @@ function Room:init(player, create_boss_room)
         table.insert(self.doorways, Doorway('bottom', false, self))
         table.insert(self.doorways, Doorway('left', false, self))
         table.insert(self.doorways, Doorway('right', false, self))
-    else
-        local boss_x = 0
-        local boss_y = 0
-        if self.player.direction == 'left' then
-            boss_x = MAP_RENDER_OFFSET_X + (MAP_WIDTH * TILE_SIZE) - TILE_SIZE + 20
-            boss_y = MAP_RENDER_OFFSET_Y + (MAP_HEIGHT / 2 * TILE_SIZE) - TILE_SIZE
-            table.insert(self.doorways, Doorway('right', false, self))
-        elseif self.player.direction == 'right' then
-            boss_x = MAP_RENDER_OFFSET_X - 20
-            boss_y = MAP_RENDER_OFFSET_Y + (MAP_HEIGHT / 2) * TILE_SIZE - TILE_SIZE
-            table.insert(self.doorways, Doorway('left', false, self))
-        elseif self.player.direction == 'up' then
-            boss_x = MAP_RENDER_OFFSET_X + (MAP_WIDTH / 2 * TILE_SIZE) - TILE_SIZE
-            boss_y = MAP_RENDER_OFFSET_Y + 20
-            table.insert(self.doorways, Doorway('bottom', false, self))
-        else
-            boss_x = MAP_RENDER_OFFSET_X + (MAP_WIDTH / 2 * TILE_SIZE) - TILE_SIZE
-            boss_y = MAP_RENDER_OFFSET_Y + (MAP_HEIGHT * TILE_SIZE) - TILE_SIZE - 20
-            table.insert(self.doorways, Doorway('top', false, self))
-        end
-
-        -- Create a Boss
-        table.insert(self.entities, Entity {
-            animations = ENTITY_DEFS['boss'].animations,
-            walkSpeed = ENTITY_DEFS['boss'].walkSpeed,
-
-            -- ensure X and Y are within bounds of the map
-            x = boss_x,
-            y = boss_y,
-            
-            width = 14,
-            height = 25,
-
-            health = 15
-        })
-
-        self.entities[1].stateMachine = StateMachine {
-            ['walk'] = function() return EntityWalkState(self.entities[1]) end,
-            ['idle'] = function() return EntityIdleState(self.entities[1]) end
-        }
-
-        self.entities[1]:changeState('walk')
     end
+end
+
+function Room:create_boss()
+    local boss_x = 0
+    local boss_y = 0
+    if self.player.direction == 'left' then
+        boss_x = MAP_RENDER_OFFSET_X + 20
+        boss_y = MAP_RENDER_OFFSET_Y + (MAP_HEIGHT / 2) * TILE_SIZE - TILE_SIZE
+        table.insert(self.doorways, Doorway('right', false, self))
+    elseif self.player.direction == 'right' then
+        boss_x = MAP_RENDER_OFFSET_X + (MAP_WIDTH * TILE_SIZE) - TILE_SIZE - 20
+        boss_y = MAP_RENDER_OFFSET_Y + (MAP_HEIGHT / 2 * TILE_SIZE) - TILE_SIZE
+        table.insert(self.doorways, Doorway('left', false, self))
+    elseif self.player.direction == 'up' then
+        boss_x = MAP_RENDER_OFFSET_X + (MAP_WIDTH / 2 * TILE_SIZE) - TILE_SIZE
+        boss_y = MAP_RENDER_OFFSET_Y + 20
+        table.insert(self.doorways, Doorway('bottom', false, self))
+    else
+        boss_x = MAP_RENDER_OFFSET_X + (MAP_WIDTH / 2 * TILE_SIZE) - TILE_SIZE
+        boss_y = MAP_RENDER_OFFSET_Y + (MAP_HEIGHT * TILE_SIZE) - TILE_SIZE - 20
+        table.insert(self.doorways, Doorway('top', false, self))
+    end
+    table.insert(self.entities, Boss {
+        animations = ENTITY_DEFS['boss'].animations,
+        walkSpeed = ENTITY_DEFS['boss'].walkSpeed,
+
+        x = boss_x,
+        y = boss_y,
+
+        width = 14,
+        height = 25,
+
+        -- one heart == 2 health
+        health = 15,
+
+        -- rendering and collision offset for spaced sprites
+        offsetY = 5
+    })
+
+    self.entities[1].stateMachine = StateMachine {
+        ['walk'] = function() return EntityWalkState(self.entities[1]) end,
+        ['idle'] = function() return EntityIdleState(self.entities[1]) end
+    }
+
+    self.entities[1]:changeState('walk')
 end
 
 function Room:update(dt)

@@ -17,14 +17,14 @@ push = require 'lib/push'
 Timer = require 'lib/knife.timer'
 
 require 'src/Animation'
-require 'src/Boss'
 require 'src/Bow'
 require 'src/Entity'
+require 'src/Boss'
 require 'src/GameObject'
 require 'src/Hitbox'
 require 'src/Player'
 require 'src/Projectile'
-require 'src/ProjectileBoss'
+require 'src/BossProjectile'
 require 'src/StateMachine'
 
 require 'src/definitions/entity'
@@ -112,7 +112,8 @@ TEXTURES = {
     ['chess'] = love.graphics.newImage('graphics/chest2.png'),
     ['bow'] = love.graphics.newImage('graphics/rotbow_w_string_20x20.png'),
     ['arrow'] = love.graphics.newImage('graphics/rotstring_20x20.png'),
-    ['boss'] = love.graphics.newImage('graphics/boss.png')
+    ['boss'] = love.graphics.newImage('graphics/boss.png'),
+    ['fire-ball'] = love.graphics.newImage('graphics/fireball.png')
 }
 
 FRAMES = {
@@ -127,7 +128,8 @@ FRAMES = {
     ['chess'] = generateQuads(TEXTURES['chess'], 32, 32),
     ['bow'] = generateQuads(TEXTURES['bow'], 20, 20),
     ['arrow'] = generateQuads(TEXTURES['arrow'], 20, 20),
-    ['boss'] = generateQuads(TEXTURES['boss'], 16, 31)
+    ['boss'] = generateQuads(TEXTURES['boss'], 16, 31),
+    ['fire-ball'] = generateQuads(TEXTURES['fire-ball'], 16, 16)
 }
 
 FONTS = {

@@ -16,13 +16,18 @@ function BossProjectile:init(def)
     self.end_x = def.x
     self.end_y = def.y
     self.dead = false
+    self.index_anim = 1
+    self.boss = def.boss
 
     local toTween = {
         [self] = {x = self.end_x, y = self.end_y}
     }
 
     -- for move the projectile
-    Timer.tween(1,toTween)
+    Timer.tween(1,toTween):finish(function()
+        self.boss.fire = false
+    end)
+    SOUNDS['fire-long']:play()
 end
 
 function BossProjectile:update(dt)
@@ -35,11 +40,18 @@ function BossProjectile:update(dt)
     end
 
     if self.dead then
-        SOUNDS['pot-wall']:play()
+        SOUNDS['fire-short']:play()
         return
     end
 end
 
 function BossProjectile:render()
-    self.obj:render(0, 0)
+    love.graphics.draw(TEXTURES[self.texture], FRAMES[self.texture][self.frame + self.index_anim],
+        self.x, self.y)
+
+    self.index_anim = self.index_anim + 1
+
+    if self.index_anim == 9 then
+        self.index_anim = 1
+    end 
 end

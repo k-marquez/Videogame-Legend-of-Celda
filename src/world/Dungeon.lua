@@ -132,6 +132,10 @@ end
     current room.
 ]]
 function Dungeon:finishShifting()
+    if self.create_boss_room then
+        self.nextRoom:create_boss()
+    end
+
     self.cameraX = 0
     self.cameraY = 0
     self.shifting = false
@@ -139,6 +143,7 @@ function Dungeon:finishShifting()
     self.nextRoom = nil
     self.currentRoom.adjacentOffsetX = 0
     self.currentRoom.adjacentOffsetY = 0 
+    
 end
 
 function Dungeon:update(dt)
