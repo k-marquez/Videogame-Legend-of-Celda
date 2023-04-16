@@ -64,7 +64,7 @@ function PlayerSwingSwordState:update(dt)
     -- check if hitbox collides with any entities in the scene
     for k, entity in pairs(self.dungeon.currentRoom.entities) do
         if entity:collides(self.swordHitbox) then
-            entity:damage(0.1)
+            entity:damage(0.5)
             SOUNDS['hit-enemy']:play()
         end
     end

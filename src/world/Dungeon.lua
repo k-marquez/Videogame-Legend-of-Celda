@@ -25,7 +25,7 @@ function Dungeon:init(player)
     self.shifting = false
 
     -- flag to create a boss room
-    self.create_boss_room = false  
+    self.create_boss_room = false
 
     -- trigger camera translation and adjustment of rooms whenever the player triggers a shift
     -- via a doorway collision, triggered in PlayerWalkState

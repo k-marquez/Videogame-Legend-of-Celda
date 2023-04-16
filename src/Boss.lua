@@ -46,7 +46,7 @@ end
 
 function Boss:update(dt)
     -- probabily of generate an attack
-    if math.random() < 0.01 and not self.fire then
+    if math.random() < 0.01 and not self.fire and not self.invulnerable then
         self:attack()
     end
 
